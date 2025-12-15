@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b4890"/>
+      <stop offset="100%" style="stop-color:#2c3a7a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="150" fill="white" opacity="0.05"/>
+  <circle cx="1100" cy="530" r="200" fill="white" opacity="0.05"/>
+
+  <!-- Megaphone icon -->
+  <g transform="translate(500, 200)">
+    <path d="M50 80 L100 50 L100 70 L180 70 L180 90 L100 90 L100 110 Z" fill="white" opacity="0.9"/>
+    <circle cx="150" cy="110" r="20" fill="white" opacity="0.8"/>
+    <circle cx="175" cy="90" r="12" fill="white" opacity="0.6"/>
+    <circle cx="165" cy="130" r="10" fill="white" opacity="0.4"/>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="380" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">
+    소문의 광장
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="450" font-family="Arial, sans-serif" font-size="32" fill="white" opacity="0.8" text-anchor="middle">
+    자유롭게 이야기하는 익명 커뮤니티
+  </text>
+
+  <!-- Categories -->
+  <g transform="translate(350, 500)">
+    <rect x="0" y="0" width="120" height="40" rx="20" fill="white" opacity="0.2"/>
+    <text x="60" y="27" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">가십</text>
+
+    <rect x="140" y="0" width="120" height="40" rx="20" fill="white" opacity="0.2"/>
+    <text x="200" y="27" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">카더라</text>
+
+    <rect x="280" y="0" width="120" height="40" rx="20" fill="white" opacity="0.2"/>
+    <text x="340" y="27" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">이런일이</text>
+  </g>
+</svg>
