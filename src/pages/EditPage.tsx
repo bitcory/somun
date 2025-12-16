@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import {
   Container,
   Box,
@@ -84,10 +84,8 @@ export function EditPage() {
     fetchPost();
   }, [id, password, navigate]);
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files) return;
-
+  // 공통 이미지 업로드 처리 함수
+  const processImageFiles = useCallback(async (files: File[]) => {
     if (images.length >= MAX_IMAGES) {
       alert(`이미지는 최대 ${MAX_IMAGES}장까지 업로드할 수 있어요`);
       return;
@@ -95,7 +93,7 @@ export function EditPage() {
 
     setUploading(true);
 
-    const validFiles = Array.from(files).filter((file) => {
+    const validFiles = files.filter((file) => {
       if (!file.type.startsWith('image/')) {
         alert('이미지 파일만 업로드할 수 있어요');
         return false;
@@ -121,10 +119,38 @@ export function EditPage() {
 
     setImages((prev) => [...prev, ...newImages]);
     setUploading(false);
+  }, [images.length]);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+
+    await processImageFiles(Array.from(files));
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
   };
+
+  // 이미지 붙여넣기 처리
+  const handlePaste = useCallback(async (e: React.ClipboardEvent) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+
+    const imageFiles: File[] = [];
+    for (const item of items) {
+      if (item.type.startsWith('image/')) {
+        const file = item.getAsFile();
+        if (file) {
+          imageFiles.push(file);
+        }
+      }
+    }
+
+    if (imageFiles.length > 0) {
+      e.preventDefault();
+      await processImageFiles(imageFiles);
+    }
+  }, [processImageFiles]);
 
   const removeImage = (index: number) => {
     setImages((prev) => prev.filter((_, i) => i !== index));
@@ -234,10 +260,11 @@ export function EditPage() {
 
               <Field label="내용" required invalid={!!errors.content} errorText={errors.content}>
                 <Textarea
-                  placeholder="소문의 내용을 자세히 적어주세요..."
+                  placeholder="소문의 내용을 자세히 적어주세요... (이미지를 Ctrl+V로 붙여넣을 수 있어요)"
                   rows={10}
                   value={formValues.content}
                   onChange={(e) => setFormValues({ ...formValues, content: e.target.value })}
+                  onPaste={handlePaste}
                   bg={inputBg}
                 />
               </Field>
@@ -300,7 +327,7 @@ export function EditPage() {
                     <Button
                       variant="outline"
                       w="100%"
-                      h="80px"
+                      h="100px"
                       borderStyle="dashed"
                       onClick={() => fileInputRef.current?.click()}
                       loading={uploading}
@@ -308,6 +335,9 @@ export function EditPage() {
                       <VStack gap="1">
                         <i className="bi bi-image" />
                         <Text fontSize="sm">클릭하여 이미지 선택</Text>
+                        <Text fontSize="xs" color="gray.500">
+                          또는 내용란에서 Ctrl+V로 붙여넣기
+                        </Text>
                         <Text fontSize="xs" color="gray.500">
                           {images.length}/{MAX_IMAGES}장 업로드됨
                         </Text>
