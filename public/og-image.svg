@@ -40,6 +40,6 @@
     <text x="200" y="27" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">카더라</text>
 
     <rect x="280" y="0" width="120" height="40" rx="20" fill="white" opacity="0.2"/>
-    <text x="340" y="27" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">이런일이</text>
+    <text x="340" y="27" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">비밀이야기</text>
   </g>
 </svg>

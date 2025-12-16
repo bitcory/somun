@@ -21,7 +21,7 @@ export function PostCard({ post, variant = 'list', showCategory = true }: PostCa
   const categoryLabels: Record<string, string> = {
     gossip: '가십',
     rumor: '카더라',
-    incident: '이런일이',
+    amazing: '비밀이야기',
   };
 
   // Thumbnail variant - for trending section

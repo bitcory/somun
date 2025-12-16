@@ -33,7 +33,7 @@ export interface CategoryInfo {
 export const CATEGORIES: CategoryInfo[] = [
   { key: 'gossip', label: '세상의 가십거리', shortLabel: '가십', icon: 'bi-chat-quote-fill', color: 'pink' },
   { key: 'rumor', label: '카더라통신', shortLabel: '카더라', icon: 'bi-broadcast', color: 'orange' },
-  { key: 'amazing', label: '세상에 이런일이', shortLabel: '이런일이', icon: 'bi-emoji-surprise-fill', color: 'teal' },
+  { key: 'amazing', label: '비밀이야기', shortLabel: '비밀이야기', icon: 'bi-emoji-surprise-fill', color: 'teal' },
 ];
 
 export const getCategoryInfo = (key: Category): CategoryInfo => {
