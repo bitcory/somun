@@ -108,16 +108,17 @@ export function PostCard({ post, variant = 'list', showCategory = true }: PostCa
       cursor="pointer"
       _hover={{ bg: hoverBg }}
       onClick={() => navigate(`/post/${post.id}`)}
-      gap="4"
+      gap={{ base: "2", md: "4" }}
     >
       {/* Category */}
       {showCategory && (
         <Text
           fontSize="xs"
           color={categoryColor}
-          w="50px"
+          w={{ base: "45px", md: "50px" }}
           flexShrink={0}
           textAlign="center"
+          fontWeight="600"
         >
           {categoryLabels[post.category] || post.category}
         </Text>
@@ -125,7 +126,7 @@ export function PostCard({ post, variant = 'list', showCategory = true }: PostCa
 
       {/* Title + Comment Count */}
       <HStack flex="1" minW="0" gap="1">
-        <Text fontSize="sm" color={titleColor} lineClamp={1}>
+        <Text fontSize="sm" color={titleColor} lineClamp={1} flex="1" minW="0">
           {post.title}
         </Text>
         {post.commentCount > 0 && (
@@ -134,22 +135,51 @@ export function PostCard({ post, variant = 'list', showCategory = true }: PostCa
           </Text>
         )}
         {post.images && post.images.length > 0 && (
-          <i className="bi bi-image" style={{ fontSize: '0.7rem', color: '#888', flexShrink: 0 }} />
+          <Box flexShrink={0} display={{ base: "none", sm: "block" }}>
+            <i className="bi bi-image" style={{ fontSize: '0.7rem', color: '#888' }} />
+          </Box>
         )}
       </HStack>
 
       {/* Meta info */}
-      <HStack gap="3" flexShrink={0}>
-        <Text fontSize="xs" color={metaColor} w="60px" textAlign="center">
+      <HStack gap={{ base: "2", md: "3" }} flexShrink={0}>
+        <Text
+          fontSize="xs"
+          color={metaColor}
+          w={{ base: "50px", md: "60px" }}
+          textAlign="center"
+          lineClamp={1}
+          overflow="hidden"
+          textOverflow="ellipsis"
+          whiteSpace="nowrap"
+        >
           {post.nickname}
         </Text>
-        <Text fontSize="xs" color={metaColor} w="50px" textAlign="center">
+        <Text
+          fontSize="xs"
+          color={metaColor}
+          w={{ base: "40px", md: "50px" }}
+          textAlign="center"
+          display={{ base: "none", sm: "block" }}
+        >
           {formatDate(post.createdAt)}
         </Text>
-        <Text fontSize="xs" color={metaColor} w="40px" textAlign="right">
+        <Text
+          fontSize="xs"
+          color={metaColor}
+          w="40px"
+          textAlign="right"
+          display={{ base: "none", md: "block" }}
+        >
           {post.views}
         </Text>
-        <Text fontSize="xs" color="red.500" w="30px" textAlign="right">
+        <Text
+          fontSize="xs"
+          color="red.500"
+          w="30px"
+          textAlign="right"
+          display={{ base: "none", md: "block" }}
+        >
           {post.likes}
         </Text>
       </HStack>
